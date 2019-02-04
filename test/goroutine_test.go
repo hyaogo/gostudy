@@ -88,6 +88,7 @@ func Player(name string, c chan int) {
 
 func f1() {
 	defer wg.Done()
+
 	for i := 0; i < 1000000; i++ {
 		if i%2 == 0 {
 			fmt.Println(i)
