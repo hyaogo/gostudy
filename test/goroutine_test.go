@@ -15,6 +15,10 @@ var (
 	counter int64
 )
 
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
 func TestGo(test *testing.T) {
 
 	wg.Add(2)
@@ -52,8 +56,37 @@ func Test3(test *testing.T) {
 	fmt.Println(counter)
 }
 
-func init() {
-	rand.Seed(time.Now().UnixNano())
+func Test4(test *testing.T) {
+	wg.Add(1)
+	baton := make(chan int)
+	go Runner(baton)
+	//开始
+	baton <- 1
+	wg.Wait()
+}
+
+func Runner(baton chan int) {
+
+	var newRunner int
+
+	//等待接力棒
+	runner := <-baton
+	fmt.Printf("Runner %d 拿到接力棒开始跑\n", runner)
+	if runner != 4 {
+		newRunner = runner + 1
+		fmt.Printf("Runner %d 走上跑道\n", newRunner)
+		go Runner(baton)
+	}
+
+	time.Sleep(1000 * time.Millisecond)
+
+	if runner == 4 {
+		fmt.Println("比赛结束:", runner)
+		wg.Done()
+		return
+	}
+	fmt.Printf("Runner %d 将接力棒交给下一位 Runner %d\n", runner, newRunner)
+	baton <- newRunner
 }
 
 //无缓冲通道
