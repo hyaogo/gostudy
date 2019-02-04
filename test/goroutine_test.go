@@ -75,7 +75,7 @@ func Player(name string, c chan int) {
 			return
 		}
 		n := rand.Intn(100)
-		if n > 90 {
+		if n > 98 {
 			fmt.Printf("Player:%s is missed\n", name)
 			close(c)
 			return
