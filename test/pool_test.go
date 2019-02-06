@@ -36,6 +36,7 @@ func createDbConnection() (io.Closer, error) {
 
 func TestPool(test *testing.T) {
 	var wg sync.WaitGroup
+
 	wg.Add(maxGoroutines)
 	p, err := pool.New(createDbConnection, poolResources)
 	if err != nil {
