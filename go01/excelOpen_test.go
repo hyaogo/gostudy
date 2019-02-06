@@ -9,7 +9,7 @@ import (
 
 //浏览器打开Excel中的地址
 func Test(t *testing.T) {
-	xlsx, err := excelize.OpenFile("D:/x.xlsx")
+	xlsx, err := excelize.OpenFile("D:/xx.xlsx")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -18,7 +18,7 @@ func Test(t *testing.T) {
 	i := 0
 	for _, row := range rows {
 		//控制条数
-		if i > 77 {
+		if i > 87 {
 
 			break
 		}
