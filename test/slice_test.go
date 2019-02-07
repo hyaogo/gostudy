@@ -40,3 +40,13 @@ func SliceParam(s []int) {
 		fmt.Println("我在SliceParam里被打印:", v)
 	}
 }
+
+func TestSliceLen(test *testing.T) {
+	s := []int{1, 2, 3, 4, 5, 6, 6}
+	fmt.Println("len(s):", len(s))
+	fmt.Println("cap(s):", cap(s))
+	s2 := s[:5]
+	fmt.Println("s2:", s2)
+	fmt.Println("len(s2):", len(s2))
+	fmt.Println("cap(s2):", cap(s2))
+}
